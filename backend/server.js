@@ -13,7 +13,14 @@ app.use(bodyParser.json())
 router(app)
 
 app.use(function(req, res) {
-    res.status(404).send({url: req.originalUrl + ' not found'})
+    res.status(404).send({
+       state: {
+          error: true,
+          code: 404,
+          message: "Not Found"
+       },
+       data: {}
+    })
 })
 
 app.listen(port, () => console.log(`App it running in port ${port}`))

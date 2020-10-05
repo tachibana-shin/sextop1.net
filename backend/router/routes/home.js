@@ -13,12 +13,23 @@ function htmlResultToJSON(req, res, html) {
       },
       data: [...dom.querySelectorAll(".thumb")].map(item => {
 
-         return {
-            poster: item.querySelector(".dp-thumb > figure > img").getAttribute("src"),
-            name: item.querySelector(".entry-title a").textContent,
-            path: item.querySelector(".dp-thumb").getAttribute("href").replace(/https?:\/\/sextop1\.(net|pro|com|\w{3})\//g, "").replace(/\/$/, "")
-         }
-      })
+            return {
+               poster: item.querySelector(".dp-thumb > figure > img").getAttribute("src"),
+               name: item.querySelector(".entry-title a").textContent,
+               path: item.querySelector(".dp-thumb").getAttribute("href").replace(/https?:\/\/sextop1\.(net|pro|com|\w{3})\//g, "").replace(/\/$/, "")
+            }
+         })
+
+         .catch(({ stack, message }) => {
+            res.json({
+               state: {
+                  error: false,
+                  code: message,
+                  message: "Unknown"
+               },
+               data: {}
+            })
+         })
    })
 
 }
