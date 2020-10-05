@@ -9,10 +9,10 @@
       </div>
       <div class="content">
          <panel-label>
-            {{ $route.params.tag ? "Tag: " : "" }} Phim sex mới
+            {{ Film.name }}
          </panel-label>
          <ul class="list">
-            <li class="item" v-for="item in Films">
+            <li class="item" v-for="item in Films.items">
                <card-film :data="item" />
             </li>
          </ul>
@@ -141,34 +141,34 @@
       data: () => ({
          Films: []
       }),
-      watch: {
-         "$route": {
-            handler() {
-               const { tag, type, page } = this.$route.params
+      methods: {
+         fetch() {
+            const { tag, type, page } = this.$route.params
 
-               let url = "http://localhost:3000/api/home"
+            let url = "http://localhost:3000/api/home"
 
-               if (tag) {
-                  url += "/tag/" + tag
-               } else if (type) {
-                  url += "/type/" + type
-               }
+            if (tag) {
+               url += "/tag/" + tag
+            } else if (type) {
+               url += "/type/" + type
+            }
 
-               if (page) {
-                  url += "/page" + page
-               }
+            if (page) {
+               url += "/page" + page
+            }
 
-               this.$axios.get(url)
-                  .then(res => res.data)
-                  .then(({ state, data }) => {
-                     if (state.error) {
-                        throw new Error(state.message)
-                     }
-                     this.Films = data
-                  })
-            },
-            immediate: true
+            this.$axios.get(url)
+               .then(res => res.data)
+               .then(({ state, data }) => {
+                  if (state.error) {
+                     throw new Error(state.message)
+                  }
+                  //this.Films = data
+               })
          }
+      },
+      created() {
+         this.fetch()
       }
    }
 </script>

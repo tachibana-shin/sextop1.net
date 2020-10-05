@@ -10,10 +10,11 @@ function multiplePath(array) {
 
    array.forEach(item => {
       if (Array.isArray(item.path)) {
-         routes.push(item.path.map(path => {
-            return Object.assign({}, item, {
+         routes.push(...item.path.map(path => {
+            return {
+               component: item.component,
                path
-            })
+            }
          }))
       } else {
          routes.push(item)
@@ -26,9 +27,12 @@ function multiplePath(array) {
 const routes = multiplePath([
    {
       path: [
-         "/(page/:page)?",
-         "/tag/:tag(/page/:page)?",
-         "/type/:type(/page/:page)?"
+         "/",
+         "/page/:page",
+         "/tag/:tag", 
+         "/tag/:tag/page/:page",
+         "/type/:type",
+         "/type/:type/page/:page"
       ],
       component: Home
    },

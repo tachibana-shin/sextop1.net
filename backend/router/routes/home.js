@@ -57,7 +57,7 @@ module.exports = {
                },
                data: {}
             })
-         }) 
+         })
    },
    type(rq, res) {
       axios.get(`https://sextop1.pro/tag/${rq.params.type}/${rq.params.page ? '/page/' + rq.params.page : ''}`)
@@ -72,7 +72,7 @@ module.exports = {
                },
                data: {}
             })
-         }) 
+         })
    }
 
 }
