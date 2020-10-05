@@ -1,15 +1,20 @@
-// The Vue build version to load with the `import` command
-// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
-import Vue from 'vue'
-import App from './App'
-import router from './router'
+import eruda from "eruda"
+eruda.init()
 
-Vue.config.productionTip = false
+import Vue from "vue"
+import App from "./App.vue"
+import router from "./router/index.js"
 
-/* eslint-disable no-new */
+// import plugins
+import VueProgressBar from "vue-progressbar"
+import VueTouchScroll from "vue-touch-scroll"
+
+Vue.use(VueProgressBar)
+Vue.use(VueTouchScroll)
+
 new Vue({
-  el: '#app',
-  router,
-  components: { App },
-  template: '<App/>'
+   el: "#app",
+   router,
+   components: { App },
+   template: "<App/>"
 })
