@@ -27,5 +27,16 @@ module.exports = {
                }))
             })
          })
+
+         .catch(({ stack, message }) => {
+            res.json({
+               state: {
+                  error: false,
+                  code: message,
+                  message: "Unknown"
+               },
+               data: {}
+            })
+         })
    }
 }
