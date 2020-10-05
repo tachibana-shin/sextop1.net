@@ -5,24 +5,38 @@ import ViewFilm from "../pages/View-Film.vue"
 
 Vue.use(Router)
 
-const routes = [
+function multiplePath(array) {
+   const routes = []
+
+   array.forEach(item => {
+      if (Array.isArray(item.path)) {
+         routes.push(item.path.map(path => {
+            return Object.assign({}, item, {
+               path
+            })
+         }))
+      } else {
+         routes.push(item)
+      }
+   })
+
+   return routes
+}
+
+const routes = multiplePath([
    {
-      path: "/",
+      path: [
+         "/(page/:page)?",
+         "/tag/:tag(/page/:page)?",
+         "/type/:type(/page/:page)?"
+      ],
       component: Home
    },
    {
       path: "/xem-phim/:name",
       component: ViewFilm
-   },
-   {
-      path: "/tag/:tag",
-      component: Home
-   },
-   {
-      path: "/type/:type",
-      component: Home
    }
-]
+])
 
 export default new Router({
    routes,

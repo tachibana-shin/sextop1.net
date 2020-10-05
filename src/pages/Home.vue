@@ -144,14 +144,21 @@
       watch: {
          "$route": {
             handler() {
-               const { tag, type } = this.$route.params
+               const { tag, type, page } = this.$route.params
 
-               this.$axios.get("http://localhost:3000/api/home", {
-                     params: {
-                     [tag ? "tag" : ""]: tag,
-                     [type ? "type" : ""]: type
-                     }
-                  })
+               let url = "http://localhost:3000/api/home"
+
+               if (tag) {
+                  url += "/tag/" + tag
+               } else if (type) {
+                  url += "/type/" + type
+               }
+
+               if (page) {
+                  url += "/page" + page
+               }
+
+               this.$axios.get(url)
                   .then(res => res.data)
                   .then(({ state, data }) => {
                      if (state.error) {
