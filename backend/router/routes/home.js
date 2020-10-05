@@ -11,28 +11,19 @@ function htmlResultToJSON(req, res, html) {
          state: 200,
          message: ""
       },
-      data: [...dom.querySelectorAll(".thumb")].map(item => {
+      data: {
+		   name: dom.querySelector(".section-title > span").textContent,
+				  title: dom.querySelector("title").textContent,                                     
+				  description: dom.querySelector("meta[name=description]").textContent,
+		  items: [...dom.querySelectorAll(".thumb")].map(item => {
 
             return {
-               name: item.querySelector(".section-title > span").textContent,
-               title: item.querySelector("title").textContent,
-               description: item.querySelector("meta[name=description]").textContent,
                poster: item.querySelector(".dp-thumb > figure > img").getAttribute("src"),
                name: item.querySelector(".entry-title a").textContent,
                path: item.querySelector(".dp-thumb").getAttribute("href").replace(/https?:\/\/sextop1\.(net|pro|com|\w{3})\//g, "").replace(/\/$/, "")
             }
          })
-
-         .catch(({ stack, message }) => {
-            res.json({
-               state: {
-                  error: false,
-                  code: message,
-                  message: "Unknown"
-               },
-               data: {}
-            })
-         })
+		}
    })
 
 }
