@@ -4,11 +4,11 @@ const axios = require("axios")
 module.exports = {
    default (rq, res) {
       axios({
-				  url: "https://sextop1.pro/wp-admin/admin-ajax.php",
-				  method: "post",
-				  data: `action=dp_get_popular_posts&showpost=${rq.params.id}&type=${rq.params.type}`,
-				  timeout: 30000
-			})
+            url: "https://sextop1.pro/wp-admin/admin-ajax.php",
+            method: "post",
+            data: `action=dp_get_popular_posts&showpost=${rq.params.id}&type=${rq.params.type}`,
+            timeout: 30000
+         })
          .then(res => res.data)
          .then(html => {
             const dom = new JSDOM(html).window.document

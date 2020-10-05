@@ -11,6 +11,6 @@ module.exports = app => {
       .get(home.type)
    app.route("/api/film/:name")
       .get(film.default)
-      app.route("/api/post/:id/:type")
+   app.route("/api/post/:id/:type")
       .get(post.default)
 }
