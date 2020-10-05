@@ -7,6 +7,8 @@ module.exports = {
          .then(res => res.data)
          .then(html => {
             const dom = new JSDOM(html).window.document
+
+					  console.log( html )
             res.json({
                state: {
                   error: false,
