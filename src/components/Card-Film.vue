@@ -1,11 +1,10 @@
 <template>
    <div class="card-film">
-      <router-link :to="data.path" class="groups.poster">
+      <router-link :to="'/xem-phim/' + data.path" class="groups.poster">
          <div class="poster">
             <img :src="data.poster">
          </div>
-         <div class="play-hover">
-         </div>
+         <div class="play-hover"></div>
       </router-link>
       <div class="groups.title">
          <h2>
@@ -38,6 +37,7 @@
 
       .groups\.poster {
          position: relative;
+         display: block;
 
          .poster {
             position: relative;
@@ -48,6 +48,9 @@
                height: auto;
                width: 100%;
                transition: transform .3s ease-in-out;
+               border-radius: 5px;
+               object-fit: cover;
+               object-position: center;
             }
          }
 

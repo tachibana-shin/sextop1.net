@@ -4,8 +4,8 @@
          <slot name="default" />
       </span>
       <ul v-if="items.length" class="tabs">
-         <li v-for="item in items" class="item">
-            <a href="#"> {{ item }} </a>
+         <li v-for="item in items" class="item" :class="{ active: item.value == value }" @click="$emit('input', item.value)">
+            <a href="#" @click.prevent> {{ item.text }} </a>
          </li>
       </ul>
    </h3>
@@ -70,13 +70,16 @@
                color: rgb(152, 152, 152);
 
                &:hover {
-                  color: #dff;
+                  color: #d33;
                }
             }
-
+/*
             &.active {
                background-color: rgb(39, 39, 39);
                border: 1px solid rgb(37, 37, 37);
+            }*/
+            &.active a {
+               color: #dff;
             }
          }
       }
@@ -89,7 +92,8 @@
             type: Array,
             default: () => [],
             required: false
-         }
+         },
+         value: String
       }
    }
 </script>

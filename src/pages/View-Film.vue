@@ -1,27 +1,35 @@
 <template>
    <div class="view-film">
-      <div class="col-6 wrapper">
+      <div class="col-6 wrapper" v-if="data">
          <div class="header">
-            <h1> Con gái ngại ngùng chuyện ấy với bạn trai được mẹ giúp đỡ </h1>
+            <h1> {{ data.name }} </h1>
          </div>
          <div class="main">
             <div class="video-wrapper">
-               <iframe allowfullscreen="true" width="100%" src="https://stream123.xyz/v/5f713e3301617"></iframe>
+               <iframe allowfullscreen="true" width="100%" :src="data.stream"></iframe>
             </div>
             <div class="infomation">
-               <div class="item">
-                  <span> Tags: </span>
-                  <a> Bố chồng nàng dâu </a>
-               </div>
-               <div class="item">
-                  <span> Thể loại: </span>
-                  <a> Bố chồng nàng dâu </a>
-               </div>
+               <ul class="list">
+                  <li>
+                     <div class="key">
+                        Tags:
+                     </div>
+                     <div class="value">
+                        <router-link v-for="(item, index) in data.tags" :key="index" :to="'/' + item.path" class="keyword"> {{ item.text }} </router-link>
+                     </div>
+                  </li>
+                  <li>
+                     <div class="key">
+                        Thể loại:
+                     </div>
+                     <div class="value">
+                        <router-link v-for="(item, index) in data.categorys" :key="index" :to="'/' + item.path" class="keyword"> {{ item.text }} </router-link>
+                     </div>
+                  </li>
+               </ul>
             </div>
             <div class="description">
-               <p class="content" :style="{ height: heightDes }" ref="des.Content" :class="{ active: heightActive }">
-                  Adira Allure đang lo lắng cho cô con gái riêng của mình, Kate Bloom. Kate có một người bạn trai tốt, Seth Gamble, nhưng cả hai quá nhút nhát với nhau. Adira lo lắng rằng họ có thể chia tay, điều này có thể khiến Kate cuối cùng hòa vào đám đông sai lầm. Quyết định tự mình giải quyết vấn đề, Adira tiến vào phòng khách và bắt đầu ra lệnh. Soon Seth đặt tay lên ngực Kate, trong khi Kate xoa bóp con cu của Seth. Adira thấy rằng cô ấy thích xem con gái riêng của mình và bạn trai của cô ấy chơi tình dục đầu tiên của họ. Đưa tay lên và chộp lấy bộ ngực của mình, cô ấy bắt đầu tự chà xát quần áo của mình.
-               </p>
+               <p class="content" :style="{ height: heightDes }" ref="des.Content" :class="{ active: heightActive }"> {{ data.description }} </p>
                <span class="more" @click="heightActive = !heightActive">
                   {{ heightActive ? "Thu gọn" : "Xem thêm" }} </span>
             </div>
@@ -47,32 +55,34 @@
          <div class="relate-movies">
             <panel-label :items="[]"> Sextop1 đề xuất </panel-label>
             <ul class="list">
-               <li class="item" v-for="i in 6">
-                  <card-film />
+               <li class="item" v-for="item in data.dpThumb">
+                  <card-film :data="item" />
                </li>
             </ul>
          </div>
       </div>
-      <div class="col-6 good-film">
-         <panel-label :items="[ 'Ngày', 'Tháng', 'Năm' ]"> Phim sex hay </panel-label>
-         <ul class="list">
-            <li class="item" v-for="i in 20">
+      <div class="col-6 good-film" v-if="data">
+         <panel-label :items="[ { value: 'day', text: 'Ngày' }, { value: 'month', text: 'Tháng' }, { value: 'year', text: 'Năm' } ]" v-model="newSexType"> Phim sex hay </panel-label>
+         <ul class="list" v-if="newSex">
+            <li class="item" v-for="item in newSex">
                <div class="film">
                   <div class="groups.poster">
                      <div class="poster">
-                        <img src="https://sextop1.pro/images/2020/10/con-gai-ngai-ngung-chuyen-ay-voi-ban-trai-duoc-me-giup-do-410x300.jpg">
+                        <img :src="item.poster">
                      </div>
                      <div class="play-hover">
                      </div>
                   </div>
                   <div class="groups.info">
-                     <h3> Bài hoc tinh duc cúa bõ cho đúa con riêng dâm đang</h3>
-                     <p> 49, 000 view </p>
+                     <h3> {{ item.name }} </h3>
+                     <p> {{ item.view }} view </p>
                   </div>
                </div>
             </li>
          </ul>
+         <list-new-sex-loading v-else />
       </div>
+      <loading v-else />
    </div>
 </template>
 <style lang="scss" scoped>
@@ -95,11 +105,17 @@
       background-color: rgba(15, 15, 15, 0.93);
       padding-bottom: 15px;
       display: flex;
+      flex-wrap: wrap;
+      position: relative;
+      width: 100%;
+
       .col-6 {
          flex: 0 0 100%;
+
          @media (min-width: 991.89px) {
             & {
                flex: 0 0 50%;
+               margin-top: 0;
             }
          }
       }
@@ -123,7 +139,7 @@
             margin-top: 15px;
 
             .video-wrapper {
-               height: 0px;
+               height: 0;
                overflow: hidden;
                padding-bottom: 56.25%;
                position: relative;
@@ -136,31 +152,73 @@
                   width: 100%;
                   border: 0;
                }
+
+               &::before {
+                  display: block;
+                  content: "";
+                  padding-top: 42.857143%;
+               }
             }
 
             .infomation {
                font-size: 13px;
                margin: 10px;
+               display: flex;
 
-               .item {
-                  display: flex;
+               .list {
+                  margin: 0;
+                  padding: 0;
+                  list-style: none;
 
-                  margin: {
-                     top: 5px;
-                     bottom: 5px;
+                  li {
+                     .key {
+                        color: rgb(152, 152, 152);
+                        margin-right: .3rem;
+
+                        margin: {
+                           top: calc(5px + .5rem);
+                           bottom: 5px;
+                        }
+
+                        display: block;
+                     }
+
+
+                     .value {
+
+                        flex: 0 0 1;
+
+                        div a {
+                           color: #eee //#0d6efd;
+                        }
+
+                        div {
+                           margin: {
+                              top: 5px;
+                              bottom: 5px;
+                           }
+
+                        }
+
+                     }
                   }
 
-                  ;
+                  .keyword {
+                     background-color: rgb((237-170), (240-170), (245-170));
+                     border-radius: 15px;
+                     display: inline-block;
+                     padding: .3rem 5.333vw;
 
-                  span {
-                     color: rgb(152, 152, 152);
-                     margin-right: .3rem;
+                     margin: {
+                        top: .5rem;
+                        left: .5rem;
+                     }
+
+                     ;
                   }
 
-                  a {
-                     color: #0d6efd;
-                  }
                }
+
             }
 
             .remind-group {
@@ -235,6 +293,12 @@
 
                .item {
                   flex: 0 0 50%;
+
+                  @media (min-width: 772px) {
+                     & {
+                        flex: 0 0 (100% / 4);
+                     }
+                  }
                }
             }
          }
@@ -355,12 +419,32 @@
 <script>
    import PanelLabel from "../components/Panel-Label.vue"
    import CardFilm from "../components/Card-Film.vue"
+   import Loading from "../components/View-Film.Loading.vue"
+   import ListNewSexLoading from "../components/ListNewSex.Loading.vue"
    export default {
-      components: { PanelLabel, CardFilm },
+      components: { PanelLabel, CardFilm, Loading, ListNewSexLoading },
       data: () => ({
          heightDes: null,
-         heightActive: false
+         heightActive: false,
+
+         newSexType: "day",
+         newSex: null,
+         data: null
       }),
+      methods: {
+         fetchNewSex() {
+            this.newSex = null
+            this.$axios.get(`http://localhost:3000/api/post/${this.data.idPost}/${this.newSexType}`)
+               .then(res => res.data)
+               .then(({ state, data }) => {
+                  if (state.error) {
+                     throw new Error(state.message)
+                  }
+
+                  this.newSex = data
+               })
+         }
+      },
       watch: {
          heightActive(val) {
             if (val) {
@@ -368,6 +452,25 @@
             } else {
                this.heightDes = null
             }
+         },
+         "$route": {
+            handler() {
+               this.data = null
+               this.$axios.get(`http://localhost:3000/api/film/${this.$route.params.name}`)
+                  .then(res => res.data)
+                  .then(({ state, data }) => {
+                     if (state.error) {
+                        throw new Error(state.message)
+                     }
+
+                     //this.data = data
+                  })
+                  .then(() => this.fetchNewSex())
+            },
+            immediate: true
+         },
+         newSexType(value) {
+            this.fetchNewSex()
          }
       }
    }

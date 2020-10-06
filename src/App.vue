@@ -16,6 +16,13 @@
 <style lang="scss" scoped>
    #app {
       padding-top: 13.867vw;
+      
+      @media (min-width: 772px) {
+         padding: {
+            left: 115px;
+            right: 115px;
+         }
+      }
 
       .fade\:ease-enter-active,
       .fade\:ease-leave-active {

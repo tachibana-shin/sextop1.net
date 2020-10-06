@@ -7,16 +7,17 @@
          </div>
          <img class="notice.close" src="/src/assets/home.ic.close.svg">
       </div>
-      <div class="content">
+      <div class="content" v-if="data">
          <panel-label>
-            {{ Film.name }}
+            {{ data.name }}
          </panel-label>
          <ul class="list">
-            <li class="item" v-for="item in Films.items">
+            <li class="item" v-for="item in data.items">
                <card-film :data="item" />
             </li>
          </ul>
       </div>
+      <list-film-loading v-else />
    </div>
 </template>
 <style lang="scss" scoped>
@@ -105,19 +106,6 @@
       }
 
       .content {
-         .label {
-            background-color: rgb(10, 10, 10);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            color: rgb(255, 255, 255);
-            font-size: 13px;
-            font-weight: normal;
-            padding-bottom: 7px;
-            padding-left: 15px;
-            padding-right: 15px;
-            padding-top: 10px;
-            text-transform: uppercase;
-         }
-
          .list {
             margin: 0;
             padding: 0;
@@ -127,6 +115,11 @@
 
             .item {
                flex: 0 0 50%;
+               @media (min-width: 772px) {
+                  & {
+                     flex: 0 0 (100% / 4);
+                  }
+               }
             }
          }
 
@@ -136,39 +129,43 @@
 <script>
    import CardFilm from "../components/Card-Film.vue"
    import PanelLabel from "../components/Panel-Label.vue"
+   import ListFilmLoading from "../components/List-Film.Loading.vue"
+
    export default {
-      components: { CardFilm, PanelLabel },
+      components: { CardFilm, PanelLabel, ListFilmLoading },
       data: () => ({
-         Films: []
+         data: null
       }),
-      methods: {
-         fetch() {
-            const { tag, type, page } = this.$route.params
+      watch: {
+         "$route": {
+            handler() {
+               const { tag, type, page } = this.$route.params
 
-            let url = "http://localhost:3000/api/home"
+               let url = "http://localhost:3000/api/home"
 
-            if (tag) {
-               url += "/tag/" + tag
-            } else if (type) {
-               url += "/type/" + type
-            }
+               if (tag) {
+                  url += "/tag/" + tag
+               } else if (type) {
+                  url += "/type/" + type
+               }
 
-            if (page) {
-               url += "/page" + page
-            }
+               if (page) {
+                  url += "/page" + page
+               }
 
-            this.$axios.get(url)
-               .then(res => res.data)
-               .then(({ state, data }) => {
-                  if (state.error) {
-                     throw new Error(state.message)
-                  }
-                  //this.Films = data
-               })
+               this.data = null
+
+               this.$axios.get(url)
+                  .then(res => res.data)
+                  .then(({ state, data }) => {
+                     if (state.error) {
+                        throw new Error(state.message)
+                     }
+                     this.data = data
+                  })
+            },
+            immediate: true
          }
-      },
-      created() {
-         this.fetch()
       }
    }
-</script>
+</script> 
