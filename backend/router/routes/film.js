@@ -8,7 +8,6 @@ module.exports = {
          .then(html => {
             const dom = new JSDOM(html).window.document
 
-            console.log(html)
             res.json({
                state: {
                   error: false,
@@ -28,18 +27,18 @@ module.exports = {
                      path: item.getAttribute("href").replace(/https?:\/\/sextop1\.(net|pro|com|\w{3})\//g, "").replace(/\/$/, ""),
                      text: item.textContent
                   })),
-                  dpThumb: [...dom.querySelectorAll(".dp-thumb")].map(item => {
-
+                  dpThumb: [...dom.querySelectorAll(".dp-item")].map(item => {
                      return {
                         poster: item.querySelector(".dp-thumb > figure > img").getAttribute("src"),
                         name: item.querySelector(".entry-title a").textContent,
                         path: item.querySelector(".dp-thumb").getAttribute("href").replace(/https?:\/\/sextop1\.(net|pro|com|\w{3})\//g, "").replace(/\/$/, "")
                      }
                   }),
-                  idPost: dom.querySelector(".ajax-post").getAttribute("data-showpost")
+                  idPost: dom.querySelector(".ajax-tab").getAttribute("data-showpost")
                }
             })
          })
+								  .catch(e => console.log(e))
          .catch(({ stack, message }) => {
             res.json({
                state: {
