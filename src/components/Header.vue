@@ -89,7 +89,8 @@
                            font-size: 1.2em;
                            height: auto;
                            line-height: 1;
-                           margin-top: -0.265em width: auto;
+                           margin-top: -0.265em;
+                           width: auto;
                            margin-right: 0.25em;
                            font-size: 12px;
                         }
