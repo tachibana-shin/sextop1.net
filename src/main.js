@@ -9,11 +9,9 @@ import router from "./router"
 import VueProgressBar from "vue-progressbar"
 import VueTouchScroll from "vue-touch-scroll"
 import axios from "axios"
-import BSVue from "bootstrap-vue"
 
 Vue.use(VueProgressBar)
 Vue.use(VueTouchScroll)
-Vue.use(BSVue)
 
 Vue.prototype.$axios = axios
 
