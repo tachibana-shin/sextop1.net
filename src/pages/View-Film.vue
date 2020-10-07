@@ -23,7 +23,7 @@
                         Thể loại:
                      </div>
                      <div class="value">
-                        <router-link v-for="(item, index) in data.categorys" :key="index" :to="'/' + item.path" class="keyword"> {{ item.text }} </router-link>
+                        <router-link v-for="(item, index) in data.categorys" :key="index" :to="'/type/' + item.path" class="keyword"> {{ item.text }} </router-link>
                      </div>
                   </li>
                </ul>
@@ -74,7 +74,9 @@
                      </div>
                   </div>
                   <div class="groups.info">
-                     <h3> {{ item.name }} </h3>
+                     <h3>
+                        <router-link :to="'/xem-phim' + item.path"> {{ item.name }} </router-link>
+                     </h3>
                      <p> {{ item.view }} view </p>
                   </div>
                </div>
@@ -463,7 +465,7 @@
                         throw new Error(state.message)
                      }
 
-                     //this.data = data
+                     this.data = data
                   })
                   .then(() => this.fetchNewSex())
             },

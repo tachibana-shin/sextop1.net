@@ -1,48 +1,44 @@
 <template>
    <div class="dropdown" :is="tag">
-      <div class="dropdown-header">
-         <slot name="button" />
-         <span class="caret"></span>
+      <div class="dropdown-header" @click.stop="active = !active">
+         <a :href="href" :class="buttonClass">
+         <slot name="button" v-if="$slots.button"/> 
+            <span v-else> {{ text }} </span>
+            <span class="caret"></span>
+         </a>
       </div>
-      <div class="dropdown-body">
-         <ul>
-            <li>
-               <a href="#"> Phim sex mới </a>
-            </li>
-         </ul>
+      <div class="dropdown-menu" :class="{ active }" @click.stop>
+         <slot name="default" />
       </div>
    </div>
 </template>
 <style lang="scss" scoped>
    .dropdown {
+      position: relative;
+
       .dropdown-header {
+         position: relative;
+
          .caret {
-            caret {
-               border-left-color: transparent;
-               border-left-style: solid;
-               border-left-width: 4px;
-               border-right-color: transparent;
-               border-right-style: solid;
-               border-right-width: 4px;
-               border-top-style: dashed;
-               border-top-width: 4px;
-               display: inline-block;
-               height: 0px;
-               margin-left: 2px;
-               vertical-align: middle;
-               width: 0;
-            }
+            border-left: 4px solid transparent;
+            border-right: 4px solid transparent;
+            border-top-width: 4px;
+            border-top-style: dashed;
+            border-top-color: currentColor;
+            border-bottom-color: currentColor;
+            display: inline-block;
+            height: 0;
+            width: 0;
+            margin-left: 2px;
+            vertical-align: middle;
          }
       }
 
-      .dropdown-body {
-         background-clip: padding-box;
-         background-color: rgb(255, 255, 255);
+      .dropdown-menu {
          border: 1px solid rgba(0, 0, 0, 0.15);
          border-radius: 4px;
          box-shadow: rgba(0, 0, 0, 0.176) 0 6px 12px;
          display: none;
-         float: left;
          font-size: 14px;
          left: 0;
          list-style-type: none;
@@ -55,12 +51,54 @@
          background-color: rgb(40, 40, 40);
          right: 0px;
 
-         li {
-            a {
+         &.active {
+            display: block;
+         }
+
+         &:before {
+            content: "";
+            border-left: .4rem solid transparent;
+            border-right: .4rem solid transparent;
+            border-bottom-width: .4rem;
+            border-bottom-style: dashed;
+            border-bottom-color: currentBackgroundColor;
+            border-bottom-color: currentBackgroundColor;
+            height: 0;
+            width: 0;
+            position: absolute;
+            top: -.4rem;
+            left: 1.5rem;
+            display: none;
+
+            @media (min-width: 772px) {
+               display: block;
+            }
+         }
+
+         /deep/.dropdown-item {
+            /deep/.dropdown-link {
+               display: block;
+               line-height: 1.42857;
                color: rgb(255, 255, 255);
                padding: 10px 15px;
                white-space: normal;
+
+               &:hover {
+                  background-color: rgb(30, 30, 30);
+               }
             }
+
+            a.active,
+            a.active:hover {
+               background-color: rgb(51, 122, 183);
+               color: rgb(255, 255, 255);
+            }
+         }
+      }
+
+      @media (min-width: 772px) {
+         &:hover>.dropdown-menu {
+            display: block !important;
          }
       }
    }
@@ -71,7 +109,29 @@
          tag: {
             type: String,
             default: "div"
+         },
+         href: {
+            type: String,
+            default: "#"
+         },
+         buttonClass: {
+            type: [String, Object, Array]
+         },
+         text: String
+      },
+      data: () => ({
+         active: false
+      }),
+      watch: {
+         active() {
+            this.$emit("updated")
          }
+      },
+      created() {
+         document.addEventListener("click", this.onClick = () => this.active = false)
+      },
+      beforeDestroy() {
+         document.removeEventListener("click", this.onClick)
       }
    }
 </script>

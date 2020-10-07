@@ -1,11 +1,11 @@
 <template>
    <div class="wrapper">
-      <div class="notice">
+      <div class="notice" v-if="renderNotice">
          <img class="notice.icon" src="/src/assets/home.ic.anotice.svg">
          <div class="notice.content">
             <p> Nếu không </p>
          </div>
-         <img class="notice.close" src="/src/assets/home.ic.close.svg">
+         <img class="notice.close" src="/src/assets/home.ic.close.svg" @click="renderNotice = false">
       </div>
       <div class="content" v-if="data">
          <panel-label>
@@ -16,6 +16,14 @@
                <card-film :data="item" />
             </li>
          </ul>
+         <vue-infinite @infinite="fetchData">
+            <div slot="spinner">
+               <list-film-loading :title="false" :length="8" />
+            </div>
+            <div slot="error" slot-scope="{ trigger }">
+               Error message, click <a href="#" @click.prevent="trigger">here</a> to retry
+            </div>
+         </vue-infinite>
       </div>
       <list-film-loading v-else />
    </div>
@@ -115,6 +123,7 @@
 
             .item {
                flex: 0 0 50%;
+
                @media (min-width: 772px) {
                   & {
                      flex: 0 0 (100% / 4);
@@ -130,42 +139,64 @@
    import CardFilm from "../components/Card-Film.vue"
    import PanelLabel from "../components/Panel-Label.vue"
    import ListFilmLoading from "../components/List-Film.Loading.vue"
+   import VueInfinite from "vue-infinite-loading"
 
    export default {
-      components: { CardFilm, PanelLabel, ListFilmLoading },
+      components: { CardFilm, PanelLabel, ListFilmLoading, VueInfinite },
       data: () => ({
-         data: null
+         data: null,
+         renderNotice: true,
+         page: null
       }),
+      methods: {
+         fetchData({ loaded, complete } = {}, updatePage = false) {
+            const { tag, type } = this.$route.params
+            const { page } = this
+
+            let url = "http://localhost:3000/api/home"
+
+            if (tag) {
+               url += "/tag/" + tag
+            } else if (type) {
+               url += "/type/" + type
+            }
+
+            if (page) {
+               url += "/page/" + page
+            }
+
+            this.$axios.get(url)
+               .then(res => res.data)
+               .then(({ state, data }) => {
+                  if (state.error) {
+                     throw new Error(state.message)
+                  }
+                  if (updatePage) {
+                     this.data = data
+                  } else {
+                     this.data.items.push(...data.items)
+                  }
+
+                  this.page = (page || 1) + 1
+
+                  if (data.items.length) {
+                     loaded && loaded()
+                  } else {
+                     complete && complete()
+                  }
+               })
+
+         }
+      },
       watch: {
          "$route": {
             handler() {
-               const { tag, type, page } = this.$route.params
-
-               let url = "http://localhost:3000/api/home"
-
-               if (tag) {
-                  url += "/tag/" + tag
-               } else if (type) {
-                  url += "/type/" + type
-               }
-
-               if (page) {
-                  url += "/page" + page
-               }
-
                this.data = null
-
-               this.$axios.get(url)
-                  .then(res => res.data)
-                  .then(({ state, data }) => {
-                     if (state.error) {
-                        throw new Error(state.message)
-                     }
-                     this.data = data
-                  })
+               this.page = null
+               this.fetchData({}, true)
             },
             immediate: true
          }
       }
    }
-</script> 
+</script>
