@@ -12,7 +12,7 @@ function htmlResultToJSON(req, res, html) {
          message: ""
       },
       data: {
-         name: dom.querySelector(".section-title > span").textContent,
+         name: dom.querySelector(".section-title").textContent,
          title: dom.querySelector("title").textContent,
          description: dom.querySelector("meta[name=\"description\"]").textContent,
          items: [...dom.querySelectorAll(".thumb")].map(item => {
@@ -45,7 +45,7 @@ module.exports = {
          })
    },
    tag(rq, res) {
-      axios.get(`https://sextop1.pro/${rq.params.tag}/${rq.params.page ? '/page/' + rq.params.page : ''}`)
+      axios.get(`https://sextop1.pro/tag/${rq.params.tag}/${rq.params.page ? '/page/' + rq.params.page : ''}`)
          .then(res => res.data)
          .then(html => htmlResultToJSON(rq, res, html))
          .catch(({ stack, message }) => {
@@ -60,7 +60,7 @@ module.exports = {
          })
    },
    type(rq, res) {
-      axios.get(`https://sextop1.pro/tag/${rq.params.type}/${rq.params.page ? '/page/' + rq.params.page : ''}`)
+      axios.get(`https://sextop1.pro/${rq.params.type}/${rq.params.page ? '/page/' + rq.params.page : ''}`)
          .then(res => res.data)
          .then(html => htmlResultToJSON(rq, res, html))
          .catch(({ stack, message }) => {
