@@ -63,8 +63,6 @@
             //  start the progress bar
             this.$Progress.start()
             //  continue to next page
-            window.document.title = to.meta.title()
-            // change title page
             next()
          })
          this.$router.afterEach((to, from) => {

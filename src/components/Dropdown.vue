@@ -1,7 +1,7 @@
 <template>
    <div class="dropdown" :is="tag">
       <div class="dropdown-header" @click.stop="active = !active">
-         <a :href="href" :class="buttonClass" @click.stop>
+         <a :href="href" :class="buttonClass" @click.prevent>
             <slot name="button" v-if="$slots.button" />
             <span v-else> {{ text }} </span>
             <span class="caret"></span>
