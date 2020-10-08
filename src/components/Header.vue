@@ -55,13 +55,13 @@
                   <router-link to="/type/phim-sex-hay" class="link"> <i class="far fa-thumbs-up"></i> Phim Sex Hay </router-link>
                </li>
                <li class="item">
-                  <dropdown href="#" button-class="link" @updated="updateHeight">
+                  <dropdown href="#" @updated="updateHeight" :button-class="['link', { active: $options.Idol.some(e => e.path == $route.path) }]">
                      <template #button>
                         <i class="far fa-star"></i>
                         Idol
                      </template>
                      <div class="dropdown-item" v-for="item in $options.Idol">
-                        <router-link :to="item.path" class="dropdown-link"> { item.text }} </router-link>
+                        <router-link :to="item.path" class="dropdown-link"> {{ item.text }} </router-link>
                      </div>
                   </dropdown>
                </li>
@@ -406,7 +406,7 @@
   },
          {
             text: 'Maya Kawamura',
-            path: '/tag/maya-kawamura/'
+            path: '/tag/maya-kawamurya/'
   },
          { text: 'Aki Sasaki', path: '/tag/aki-sasaki/' },
          {
@@ -420,7 +420,7 @@
             path: '/tag/yui-nishikawa/'
   },
          { text: 'MEGURI', path: '/tag/meguri/' },
-         { text: '…', path: '#' }
+         { text: '…', path: 'javascript:void(0)' }
       ],
       methods: {
          transitionEnd: noop,

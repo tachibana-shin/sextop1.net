@@ -43,6 +43,7 @@ const routes = multiplePath([
 ])
 
 export default new Router({
+   mode: "history",
    routes,
    scrollBehavior(from, to, saved) {
       return saved || { x: 0, y: 0 }

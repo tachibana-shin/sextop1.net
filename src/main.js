@@ -8,7 +8,7 @@ import router from "./router/index.js"
 // import plugins
 import VueProgressBar from "vue-progressbar"
 import axios from "axios"
-import VueLazy from "vue-lazyloader"
+import VueLazy from "vue-lazyload" 
 
 Vue.use(VueProgressBar, {
    color: 'rgb(0, 132, 240)',
