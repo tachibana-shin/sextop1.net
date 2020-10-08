@@ -195,6 +195,9 @@
                   } else {
                      complete && complete()
                   }
+                  
+                  document.title = data.title
+                  document.querySelector("meta[name=\"description\"]").setAttribute("content", )
                })
 
          }

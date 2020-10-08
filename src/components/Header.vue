@@ -54,6 +54,17 @@
                <li class="item">
                   <router-link to="/type/phim-sex-hay" class="link"> <i class="far fa-thumbs-up"></i> Phim Sex Hay </router-link>
                </li>
+               <li class="item">
+                  <dropdown href="#" button-class="link" @updated="updateHeight">
+                     <template #button>
+                        <i class="far fa-star"></i>
+                        Idol
+                     </template>
+                     <div class="dropdown-item" v-for="item in $options.Idol">
+                        <router-link :to="item.path" class="dropdown-link"> { item.text }} </router-link>
+                     </div>
+                  </dropdown>
+               </li>
             </ul>
          </div>
       </div>
@@ -106,15 +117,20 @@
          position: relative;
          vertical-align: middle;
          background-color: rgba(15, 15, 15, .93);
+
          padding: {
             top: .3rem;
             bottom: .3rem;
-         };
+         }
+
+         ;
+
          @media (min-width: 772px) {
             text-align: left;
             display: flex;
             align-items: center;
          }
+
          img {
             height: auto;
          }
@@ -209,13 +225,13 @@
                      display: inline-block;
                   }
 
-                  & >>> .active.link,
-                  & >>> .active.link:hover {
+                  &>>>.active.link,
+                  &>>>.active.link:hover {
                      background-color: rgb(0, 0, 0);
                      color: rgb(255, 255, 255);
                   }
 
-                  & >>> .link {
+                  &>>>.link {
                      padding: 10px;
 
                      @media (min-width: 772px) {
@@ -254,9 +270,11 @@
 
          .search {
             box-shadow: rgba(255, 255, 255, 0.1) 0 1px 0 inset;
+
             @media (min-width: 772px) {
                box-shadow: none;
             }
+
             margin: 5px;
             padding-top: 10px;
             padding-bottom: 5px;
@@ -365,6 +383,45 @@
          heightSearch: undefined,
          stateSearch: false
       }),
+      Idol: [
+         { text: 'Yua Mikami', path: '/tag/yua-mikami/' },
+         { text: 'Eimi Fukada', path: '/tag/eimi-fukada/' },
+         {
+            text: 'Saeko Matsushita',
+            path: '/tag/saeko-matsushita/'
+  },
+         { text: 'Yuu Shinoda', path: '/tag/yuu-shinoda/' },
+         {
+            text: 'Akari Mitani',
+            path: '/tag/akari-mitani/'
+  },
+         { text: 'Yui Hatano', path: '/tag/yui-hatano/' },
+         {
+            text: 'Akiho Yoshizawa',
+            path: '/tag/akiho-yoshizawa/'
+  },
+         {
+            text: 'Rina Ishihara',
+            path: '/tag/rina-ishihara/'
+  },
+         {
+            text: 'Maya Kawamura',
+            path: '/tag/maya-kawamura/'
+  },
+         { text: 'Aki Sasaki', path: '/tag/aki-sasaki/' },
+         {
+            text: 'Asahi Mizuno',
+            path: '/tag/asahi-mizuno/'
+  },
+         { text: 'Miho Tono', path: '/tag/miho-tono/' },
+         { text: 'Julia', path: '/tag/julia/' },
+         {
+            text: 'Yui Nishikawa',
+            path: '/tag/yui-nishikawa/'
+  },
+         { text: 'MEGURI', path: '/tag/meguri/' },
+         { text: '…', path: '#' }
+      ],
       methods: {
          transitionEnd: noop,
          open() {

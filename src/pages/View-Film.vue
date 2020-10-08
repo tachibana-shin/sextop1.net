@@ -68,7 +68,7 @@
                <div class="film">
                   <div class="groups.poster">
                      <div class="poster">
-                        <img :src="item.poster">
+                        <img v-lazy="item.poster">
                      </div>
                      <div class="play-hover">
                      </div>

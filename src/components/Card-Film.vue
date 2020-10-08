@@ -2,7 +2,7 @@
    <div class="card-film">
       <router-link :to="'/xem-phim/' + data.path" class="groups.poster">
          <div class="poster">
-            <img :src="data.poster">
+            <img v-lazy="data.poster">
          </div>
          <div class="play-hover"></div>
       </router-link>
@@ -45,7 +45,7 @@
 
             img {
                display: block;
-               height: auto;
+               height: 126px;
                width: 100%;
                transition: transform .3s ease-in-out;
                border-radius: 5px;
