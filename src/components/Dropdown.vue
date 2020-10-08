@@ -76,7 +76,7 @@
          }
 
          & >>> .dropdown-item {
-            & >>> .dropdown-link {
+            .dropdown-link {
                display: block;
                line-height: 1.42857;
                color: rgb(255, 255, 255);
