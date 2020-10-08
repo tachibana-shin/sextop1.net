@@ -84,7 +84,7 @@
          </ul>
          <list-new-sex-loading v-else />
       </div>
-      <loading v-else />
+      <loading v-else/>
    </div>
 </template>
 <style lang="scss" scoped>
@@ -109,21 +109,19 @@
       display: flex;
       flex-wrap: wrap;
       position: relative;
-      width: 100%;
+      box-sizing: border-box;
 
       .col-6 {
          flex: 0 0 100%;
+         position: relative;
 
-         @media (min-width: 991.89px) {
-            & {
-               flex: 0 0 50%;
-               margin-top: 0;
-            }
+         @media (min-width: 991px) {
+            flex: 0 0 50%;
+            margin-top: 0;
          }
       }
 
       .wrapper {
-
          .header {
             border: 1px solid rgba(255, 255, 255, 0.08);
 
@@ -145,6 +143,7 @@
                overflow: hidden;
                padding-bottom: 56.25%;
                position: relative;
+               width: 100%;
 
                iframe {
                   height: 100%;

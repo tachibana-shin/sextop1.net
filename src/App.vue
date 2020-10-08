@@ -14,6 +14,9 @@
 <style lang="scss" scoped>
    #app {
       //padding-top: 13.867vw;
+      box-sizing: border-box;
+      position: relative;
+      background-color: rgb(40, 40, 40);
 
       @media (min-width: 772px) {
          .header-app {

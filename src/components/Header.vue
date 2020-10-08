@@ -1,14 +1,17 @@
 <template>
    <header class="header">
-      <div class="navbar">
+      <div class="col-12 col-md-6 order-md-0 logo">
+         <img src="https://sextop1.pro/wp-content/themes/top1tube/assets/images/logotop1.png">
+      </div>
+      <div class="col-12 order-md-2 navbar">
          <div class="navbar.header">
             <button class="hambuger" @click="stateCollapse = !stateCollapse">
                <span></span>
                <span></span>
                <span></span>
             </button>
-            <button class="search">
-               <i class="icon-search fa-sm"></i>
+            <button class="search-icon">
+               <i class="fas fa-search" @click="stateSearch = !stateSearch"></i>
             </button>
          </div>
          <div class="navbar.collapse" :style="{ height: heightCollapse }" :class="{ collapsing }" @transitionend="transitionEnd" ref="Collapse">
@@ -54,18 +57,70 @@
             </ul>
          </div>
       </div>
+      <div class="col-12 col-md-6 orfer-md-1 wrapper-search" :style="{ height: heightSearch }" ref="Search">
+         <div class="search">
+            <button class="prepend">
+               <i class="fas fa-search"></i>
+            </button>
+            <input placeholder="Nhập từ khóa" />
+            <button class="append">
+               Tìm kiếm
+            </button>
+         </div>
+      </div>
    </header>
 </template>
 <style lang="scss" scoped>
    .header {
-      background-color: rgba(15, 15, 15, 0.99);
+      display: flex;
+      flex-wrap: wrap;
+      position: relative;
+      background-color: rgba(31, 31, 31, 0.99);
       border-bottom-color: rgb(0, 0, 0);
       border-bottom-style: solid;
       border-bottom-width: 1px;
       box-shadow: rgba(0, 0, 0, 0.4) 0 1px 5px;
 
-      .navbar {
+      @media (min-width: 772px) {
+         background-color: rgba(15, 15, 15, 0.99);
+      }
+
+      .col-12 {
+         flex: 0 0 100%;
+      }
+
+      @media (min-width: 772px) {
+         .col-md-6 {
+            flex: 0 0 50%;
+         }
+
+         @for $i from 0 to 3 {
+            .order-md-#{$i} {
+               order: $i;
+            }
+         }
+      }
+
+      .logo {
+         text-align: center;
          position: relative;
+         vertical-align: middle;
+         background-color: rgba(15, 15, 15, .93);
+         padding: {
+            top: .3rem;
+            bottom: .3rem;
+         };
+         @media (min-width: 772px) {
+            text-align: left;
+            display: flex;
+            align-items: center;
+         }
+         img {
+            height: auto;
+         }
+      }
+
+      .navbar {
 
          .navbar\.header {
             display: flex;
@@ -75,14 +130,14 @@
             position: relative;
 
             button {
-               border-radius: 4px;
                padding: 9px 10px;
                margin: 6px 0;
                position: relative;
                background-color: transparent;
                font-size: 14px;
                color: rgb(224, 224, 224);
-               outline: none;
+               outline: none !important;
+               border: 0 !important;
 
                &:hover {
                   outline: none;
@@ -104,7 +159,7 @@
                }
             }
 
-            .search {
+            .search-icon {
                margin: 2px 0;
                padding: 9px;
             }
@@ -163,6 +218,10 @@
                   .link {
                      padding: 10px;
 
+                     @media (min-width: 772px) {
+                        padding: 15px;
+                     }
+
                      line-height: 20px;
                      font-size: 14px;
                      color: rgb(179, 179, 179);
@@ -182,6 +241,115 @@
             }
          }
       }
+
+      .wrapper-search {
+         height: 0;
+         overflow: hidden;
+         transition: height .5s ease;
+
+         @media (min-width: 772px) {
+            overflow: visible;
+            height: auto;
+         }
+
+         .search {
+            box-shadow: rgba(255, 255, 255, 0.1) 0 1px 0 inset;
+            @media (min-width: 772px) {
+               box-shadow: none;
+            }
+            margin: 5px;
+            padding-top: 10px;
+            padding-bottom: 5px;
+            display: flex;
+            position: relative;
+
+            @media (min-width: 772px) {
+               padding-bottom: 15px;
+            }
+
+            input {
+               box-shadow: rgba(0, 0, 0, 0.075) 0 1px 1px inset;
+               color: rgb(85, 85, 85);
+               display: inline-block;
+               font-size: 14px;
+               height: 34px;
+               line-height: 1.42857;
+               padding: 6px 12px;
+               width: 100%;
+               background-color: rgb(9, 11, 12);
+               border: 1px solid rgba(255, 255, 255, 0.08);
+               box-shadow: none;
+               color: rgb(255, 255, 255);
+               font-size: 13px;
+               padding: 10px 4px;
+
+               flex: {
+                  basis: 0;
+                  grow: 1;
+                  shrink: 1;
+               }
+
+               border: 1px solid rgba(255, 255, 255, 0.08);
+               border-right: 0;
+               border-radius: 3px;
+               border-top-right-radius: 0;
+               border-bottom-right-radius: 0;
+
+               @media (min-width: 772px) {
+                  border-left: 0;
+                  border-top-left-radius: 0;
+                  border-top-left-radius: 0;
+               }
+            }
+
+            button {
+               border-radius: 4px;
+               cursor: pointer;
+               display: inline-block;
+               font-size: 14px;
+               font-weight: normal;
+               line-height: 1.42857;
+               margin-bottom: 0;
+               padding: 6px 12px;
+               text-align: center;
+               touch-action: manipulation;
+               user-select: none;
+               vertical-align: middle;
+               white-space: nowrap;
+               background-color: rgb(25, 25, 25);
+               border: 1px solid rgba(255, 255, 255, 0.08);
+               color: rgb(165, 165, 165);
+
+               &:hover {
+                  background-color: rgb(217, 83, 79);
+                  border-bottom-color: rgb(212, 63, 58);
+                  border-left-color: rgb(212, 63, 58);
+                  border-right-color: rgb(212, 63, 58);
+                  border-top-color: rgb(212, 63, 58);
+                  color: rgb(255, 255, 255);
+               }
+            }
+
+            .prepend {
+               background-color: rgb(9, 11, 12);
+               margin: 0;
+               border-right: 0;
+               border-top-right-radius: 0;
+               border-bottom-right-radius: 0;
+               display: none;
+
+               @media (min-width: 772px) {
+                  display: inline-block;
+               }
+            }
+
+            .append {
+               border-top-left-radius: 0;
+               border-bottom-left-radius: 0;
+               border-left: 0;
+            }
+         }
+      }
    }
 </style>
 <script>
@@ -192,7 +360,10 @@
       data: () => ({
          heightCollapse: undefined,
          stateCollapse: false,
-         collapsing: false
+         collapsing: false,
+
+         heightSearch: undefined,
+         stateSearch: false
       }),
       methods: {
          transitionEnd: noop,
@@ -227,6 +398,14 @@
                this.open()
             } else {
                this.close()
+            }
+         },
+         stateSearch(val) {
+            if (val) {
+               this.$refs.Search.offsetHeight
+               this.heightSearch = this.$refs.Search.scrollHeight + "px"
+            } else {
+               this.heightSearch = undefined
             }
          }
       }

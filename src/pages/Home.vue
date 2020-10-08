@@ -8,7 +8,7 @@
          <img class="notice.close" src="/src/assets/home.ic.close.svg" @click="renderNotice = false">
       </div>
       <div class="content" v-if="data">
-         <panel-label>
+         <panel-label class="title">
             {{ data.name }}
          </panel-label>
          <ul class="list">
@@ -53,7 +53,7 @@
 
       .notice {
          background-color: $bg-wrapper;
-         height: 8.533vw;
+         height: (8.533rem * 3.6 / 16);
          position: relative;
          top: 0;
          left: 0;
@@ -63,7 +63,7 @@
          justify-content: space-between;
 
          .notice\.icon {
-            margin-left: 5.333vw;
+            margin-left: (5.333rem * 3.6 / 16);
          }
 
          .notice\.content {
@@ -74,8 +74,8 @@
             }
 
             margin: {
-               left: (12.8vw - 5.333);
-               right: (12.8vw - 5.333);
+               left: ((12.8rem - 5.333) * 3.6 / 16);
+               right: ((12.8rem - 5.333) * 3.6 / 16);
             }
 
             ;
@@ -90,7 +90,7 @@
                color: $color-main;
                display: inline-block;
                min-width: 100%;
-               font-size: 3.2vmin;
+               font-size: (3.2rem * 3.6 / 16);
                font-weight: 400;
                white-space: nowrap;
                animation: text-run 10s linear infinite;
@@ -108,12 +108,17 @@
          }
 
          .notice\.close {
-            margin-right: 5.333vw;
+            margin-right: ((5.333rem * 3.6) / 16);
             margin-left: auto;
          }
       }
 
       .content {
+         position: relative;
+         box-sizing: border-box;
+         .title {
+            margin-top: 0;
+         }
          .list {
             margin: 0;
             padding: 0;
@@ -132,6 +137,10 @@
             }
          }
 
+      }
+      
+      .notice ~ .content .title {
+         margin-top: 15px;
       }
    }
 </style>
