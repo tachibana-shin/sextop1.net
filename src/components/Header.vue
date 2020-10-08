@@ -209,13 +209,13 @@
                      display: inline-block;
                   }
 
-                  .active.link,
-                  .active.link:hover {
+                  & >>> .active.link,
+                  & >>> .active.link:hover {
                      background-color: rgb(0, 0, 0);
                      color: rgb(255, 255, 255);
                   }
 
-                  .link {
+                  & >>> .link {
                      padding: 10px;
 
                      @media (min-width: 772px) {

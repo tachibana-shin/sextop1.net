@@ -2,7 +2,7 @@
    <div class="dropdown" :is="tag">
       <div class="dropdown-header" @click.stop="active = !active">
          <a :href="href" :class="buttonClass">
-         <slot name="button" v-if="$slots.button"/> 
+            <slot name="button" v-if="$slots.button" />
             <span v-else> {{ text }} </span>
             <span class="caret"></span>
          </a>
