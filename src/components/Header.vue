@@ -367,6 +367,7 @@
       }),
       beforeRouteEnter(from, to, next) {
          this.stateCollapse = false
+			alert(1)
          next()
       },
       methods: {
