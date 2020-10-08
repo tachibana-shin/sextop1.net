@@ -470,7 +470,7 @@
                      document.querySelector("meta[name=\"description\"]").setAttribute("content", data.description)
                   })
                   .then(() => this.fetchNewSex())
-                  .catch({ stack } => {
+                  .catch(({ stack }) => {
                      if (stack == 404) {
                         this.$router.push("/404")
                      }

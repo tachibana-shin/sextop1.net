@@ -199,7 +199,7 @@
                   document.title = data.title
                   document.querySelector("meta[name=\"description\"]").setAttribute("content", data.description)
                })
-               .catch({ stack } => {
+               .catch(({ stack }) => {
                   if ( stack == 404 ) {
                      this.$router.push("/404")
                   }

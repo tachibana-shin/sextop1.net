@@ -29,7 +29,7 @@ const routes = multiplePath([
       path: [
          "/",
          "/page/:page",
-         "/tag/:tag", 
+         "/tag/:tag",
          "/tag/:tag/page/:page",
          "/type/:type",
          "/type/:type/page/:page"
