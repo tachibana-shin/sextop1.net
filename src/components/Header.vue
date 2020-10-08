@@ -20,7 +20,7 @@
                   <router-link to="/" class="link"> <i class="fas fa-home"></i> Phim Sex </router-link>
                </li>
                <li class="item">
-                  <dropdown href="#" :button-class="['link', { active: isRouteGroup(Vietsub) }]" text="Vietsub" @updated="updateHeight">
+                  <dropdown href="#" :button-class="['link', { active: isRouteGroup($options.Vietsub) }]" text="Vietsub" @updated="updateHeight">
                      <template #button>
                         <i class="far fa-heart"></i>
                         Vietsub
@@ -51,7 +51,7 @@
                   <router-link to="/type/phim-sex-hay" class="link"> <i class="far fa-thumbs-up"></i> Phim Sex Hay </router-link>
                </li>
                <li class="item">
-                  <dropdown href="#" @updated="updateHeight" :button-class="['link', { active: isRouteGroup(Idol) }]">
+                  <dropdown href="#" @updated="updateHeight" :button-class="['link', { active: isRouteGroup($options.Idol) }]">
                      <template #button>
                         <i class="far fa-star"></i>
                         Idol

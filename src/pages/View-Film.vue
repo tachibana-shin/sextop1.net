@@ -466,7 +466,7 @@
 
                      this.data = data
 
-                     document.title = data.title
+                     document.title = data.name
                      document.querySelector("meta[name=\"description\"]").setAttribute("content", data.description)
                   })
                   .then(() => this.fetchNewSex())
