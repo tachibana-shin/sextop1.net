@@ -45,11 +45,15 @@
          margin: 2px 0 0 0;
          min-width: 160px;
          padding: 5px 0;
-         position: absolute;
          top: 100%;
          z-index: 10000;
          background-color: rgb(40, 40, 40);
          right: 0px;
+
+			@media (min-width: 772px) {
+            position: absolute;
+				box-shadow: none;
+			}
 
          &.active {
             display: block;
@@ -128,7 +132,7 @@
          }
       },
       created() {
-         document.addEventListener("click", this.onClick = () => this.active = false)
+         //document.addEventListener("click", this.onClick = () => this.active = false)
       },
       beforeDestroy() {
          document.removeEventListener("click", this.onClick)
