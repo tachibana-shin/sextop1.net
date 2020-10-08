@@ -365,10 +365,6 @@
          heightSearch: undefined,
          stateSearch: false
       }),
-      beforeRouteEnter(from, to, next) {
-         this.stateCollapse = false
-         next()
-      },
       methods: {
          transitionEnd: noop,
          open() {
@@ -412,6 +408,12 @@
                this.heightSearch = undefined
             }
          }
+      },
+      created() {
+         this.$router.beforeEach((from, to, next) => {
+            this.stateCollapse = false
+            next()
+         })
       }
    }
 </script>

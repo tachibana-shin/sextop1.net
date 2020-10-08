@@ -48,6 +48,29 @@
       data: () => ({
          HeaderAppShow: true,
          NavListShow: false
-      })
+      }),
+      mounted() {
+         this.$Progress.finish()
+      },
+      created() {
+         this.$Progress.start()
+         this.$router.beforeEach((to, from, next) => {
+            if (to.meta.progress !== undefined) {
+               let meta = to.meta.progress
+               // parse meta tags
+               this.$Progress.parseMeta(meta)
+            }
+            //  start the progress bar
+            this.$Progress.start()
+            //  continue to next page
+            window.document.title = to.meta.title()
+            // change title page
+            next()
+         })
+         this.$router.afterEach((to, from) => {
+            //  finish the progress bar
+            this.$Progress.finish()
+         })
+      }
    }
 </script>
