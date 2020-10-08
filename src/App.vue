@@ -44,7 +44,7 @@
    import '@/awesome/scss/solid.scss'
 
    export default {
-      components: { HeaderApp, NavbarNav, FooterApp, BackdropMark },
+      components: { HeaderApp, FooterApp },
       data: () => ({
          HeaderAppShow: true,
          NavListShow: false
