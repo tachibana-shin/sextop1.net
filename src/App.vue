@@ -1,26 +1,38 @@
 <template>
    <div id="app">
       <transition name="swipeY.top:ease">
-         <header-app @show-menu="NavListShow = true" v-show="HeaderAppShow" @input="HeaderAppShow = $event" />
+         <header-app @show-menu="NavListShow = true" v-show="HeaderAppShow" @input="HeaderAppShow = $event" class="header-app" />
       </transition>
       <transition name="fade:ease">
          <backdrop-mark v-if="NavListShow" />
       </transition>
-      
-      <navbar-nav :class="{ active: NavListShow }" @hide-menu="NavListShow = false"/>
-      
-      <router-view />
+      <navbar-nav :class="{ active: NavListShow }" @hide-menu="NavListShow = false" />
+      <router-view class="router-view" />
       <footer-app />
    </div>
 </template>
 <style lang="scss" scoped>
    #app {
-      padding-top: 13.867vw;
-      
+      //padding-top: 13.867vw;
+      box-sizing: border-box;
+      position: relative;
+      background-color: rgb(40, 40, 40);
+
       @media (min-width: 772px) {
-         padding: {
-            left: 115px;
-            right: 115px;
+         .header-app {
+            padding: {
+               left: 115px;
+               right: 115px;
+            }
+
+            ;
+         }
+
+         .router-view {
+            margin: {
+               left: 115px;
+               right: 115px;
+            }
          }
       }
 

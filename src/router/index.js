@@ -46,5 +46,6 @@ export default new Router({
    routes,
    scrollBehavior(from, to, saved) {
       return saved || { x: 0, y: 0 }
-   }
+   },
+   linkExactActiveClass: "active"
 })
