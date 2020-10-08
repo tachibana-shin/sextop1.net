@@ -80,6 +80,14 @@
    import NavbarNav from "./components/NavBar-Nav.vue"
    import FooterApp from "./components/Footer.vue"
    import BackdropMark from "./components/Backdrop-Mark.vue"
+   
+   // @import awesome
+   import '@/awesome/scss/fontawesome.scss'
+   import '@/awesome/scss/brands.scss'
+   import '@/awesome/scss/duotone.scss'
+   import '@/awesome/scss/light.scss'
+   import '@/awesome/scss/regular.scss'
+   import '@/awesome/scss/solid.scss'
 
    export default {
       components: { HeaderApp, NavbarNav, FooterApp, BackdropMark },

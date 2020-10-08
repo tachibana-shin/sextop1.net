@@ -1,7 +1,7 @@
 <template>
    <header class="header">
       <div class="col-12 col-md-6 order-md-0 logo">
-         <img src="https://sextop1.pro/wp-content/themes/top1tube/assets/images/logotop1.png">
+         <img :src="require('@/assets/logo.png')">
       </div>
       <div class="col-12 order-md-2 navbar">
          <div class="navbar.header">

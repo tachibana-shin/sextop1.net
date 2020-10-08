@@ -57,7 +57,7 @@
          .play-hover {
             background: {
                color: rgb(0, 0, 0);
-               image: url("https://sextop1.pro/wp-content/themes/top1tube/assets/images/play-icon.png");
+               image: url("~@/assets/play-icon.png");
                position: center;
                repeat: no-repeat;
                size: 30px;

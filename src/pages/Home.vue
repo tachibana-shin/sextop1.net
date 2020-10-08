@@ -1,11 +1,11 @@
 <template>
    <div class="wrapper">
       <div class="notice" v-if="renderNotice">
-         <img class="notice.icon" src="/src/assets/home.ic.anotice.svg">
+         <img class="notice.icon" :src="require('@/assets/home.ic.anotice.svg')">
          <div class="notice.content">
             <p> Nếu không </p>
          </div>
-         <img class="notice.close" src="/src/assets/home.ic.close.svg" @click="renderNotice = false">
+         <img class="notice.close" :src="require('@/assets/home.ic.close.svg')" @click="renderNotice = false">
       </div>
       <div class="content" v-if="data">
          <panel-label class="title">
@@ -116,9 +116,11 @@
       .content {
          position: relative;
          box-sizing: border-box;
+
          .title {
             margin-top: 0;
          }
+
          .list {
             margin: 0;
             padding: 0;
@@ -138,8 +140,8 @@
          }
 
       }
-      
-      .notice ~ .content .title {
+
+      .notice~.content .title {
          margin-top: 15px;
       }
    }
