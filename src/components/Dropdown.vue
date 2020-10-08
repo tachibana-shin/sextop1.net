@@ -75,8 +75,8 @@
             }
          }
 
-         /deep/.dropdown-item {
-            /deep/.dropdown-link {
+         & >>> .dropdown-item {
+            & >>> .dropdown-link {
                display: block;
                line-height: 1.42857;
                color: rgb(255, 255, 255);
