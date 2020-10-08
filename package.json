@@ -10,7 +10,11 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "axios": "^0.20.0",
+    "eruda": "^2.4.1",
     "vue": "^2.5.2",
+    "vue-infinite-loading": "^2.4.5",
+    "vue-progressbar": "^0.7.5",
     "vue-router": "^3.0.1"
   },
   "devDependencies": {
@@ -38,6 +42,8 @@
     "postcss-loader": "^2.0.8",
     "postcss-url": "^7.2.1",
     "rimraf": "^2.6.0",
+    "sass": "^1.27.0",
+    "sass-loader": "7.3.1",
     "semver": "^5.3.0",
     "shelljs": "^0.7.6",
     "uglifyjs-webpack-plugin": "^1.1.1",
