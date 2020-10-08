@@ -20,19 +20,15 @@
                   <router-link to="/" class="link"> <i class="fas fa-home"></i> Phim Sex </router-link>
                </li>
                <li class="item">
-                  <dropdown href="#" button-class="link" text="Vietsub" @updated="updateHeight">
+                  <dropdown href="#" :button-class="['link', { active: isRouteGroup(Vietsub) }]" text="Vietsub" @updated="updateHeight">
                      <template #button>
                         <i class="far fa-heart"></i>
                         Vietsub
                      </template>
-                     <div class="dropdown-item">
-                        <router-link to="/tag/viet-sub-nhat-ban/" class="dropdown-link"> Nhật Bản </router-link>
-                     </div>
-                     <div class="dropdown-item">
-                        <router-link to="/tag/viet-sub-chau-au" class="dropdown-link"> Châu Âu </router-link>
-                     </div>
-                     <div class="dropdown-item">
-                        <router-link to="/type/phim-sex-viet-sub" class="dropdown-link"> Phim Sex Vietsub </router-link>
+                     <div class="dropdown-item" v-for="item in $options.Vietsub">
+                        <router-link :to="item.path" class="dropdown-link">
+                           {{ item.text }}
+                        </router-link>
                      </div>
                   </dropdown>
                </li>
@@ -55,7 +51,7 @@
                   <router-link to="/type/phim-sex-hay" class="link"> <i class="far fa-thumbs-up"></i> Phim Sex Hay </router-link>
                </li>
                <li class="item">
-                  <dropdown href="#" @updated="updateHeight" :button-class="['link', { active: $options.Idol.some(e => e.path == $route.path) }]">
+                  <dropdown href="#" @updated="updateHeight" :button-class="['link', { active: isRouteGroup(Idol) }]">
                      <template #button>
                         <i class="far fa-star"></i>
                         Idol
@@ -383,6 +379,11 @@
          heightSearch: undefined,
          stateSearch: false
       }),
+      Vietsub: [
+         { path: "/tag/viet-sub-nhat-ban/", text: "Nhật Bản" },
+         { path: "/tag/viet-sub-chau-au", text: "Châu Âu" },
+         { path: "/type/phim-sex-viet-sub", text: "Phim Sex Vietsub" }
+      ],
       Idol: [
          { text: 'Yua Mikami', path: '/tag/yua-mikami/' },
          { text: 'Eimi Fukada', path: '/tag/eimi-fukada/' },
@@ -447,6 +448,9 @@
                this.heightCollapse = "auto"
                setTimeout(() => this.heightCollapse = this.$refs.Collapse.scrollHeight + "px")
             }
+         },
+         isRouteGroup(group) {
+            return group.some(e => e.path == this.$route.path)
          }
       },
       watch: {

@@ -84,7 +84,7 @@
          </ul>
          <list-new-sex-loading v-else />
       </div>
-      <loading v-else/>
+      <loading v-else />
    </div>
 </template>
 <style lang="scss" scoped>
@@ -461,12 +461,20 @@
                   .then(res => res.data)
                   .then(({ state, data }) => {
                      if (state.error) {
-                        throw new Error(state.message)
+                        throw new Error(state.code)
                      }
 
                      this.data = data
+
+                     document.title = data.title
+                     document.querySelector("meta[name=\"description\"]").setAttribute("content", data.description)
                   })
                   .then(() => this.fetchNewSex())
+                  .catch({ stack } => {
+                     if (stack == 404) {
+                        this.$router.push("/404")
+                     }
+                  })
             },
             immediate: true
          },

@@ -180,7 +180,7 @@
                .then(res => res.data)
                .then(({ state, data }) => {
                   if (state.error) {
-                     throw new Error(state.message)
+                     throw new Error(state.code)
                   }
                   if (updatePage) {
                      this.data = data
@@ -197,7 +197,12 @@
                   }
                   
                   document.title = data.title
-                  document.querySelector("meta[name=\"description\"]").setAttribute("content", )
+                  document.querySelector("meta[name=\"description\"]").setAttribute("content", data.description)
+               })
+               .catch({ stack } => {
+                  if ( stack == 404 ) {
+                     this.$router.push("/404")
+                  }
                })
 
          }
