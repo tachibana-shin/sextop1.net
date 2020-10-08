@@ -1,6 +1,6 @@
 <template>
    <div id="app">
-      <header-app/>
+      <header-app />
       <router-view class="router-view" />
       <footer-app />
    </div>
@@ -34,7 +34,7 @@
 <script>
    import HeaderApp from "./components/Header.vue"
    import FooterApp from "./components/Footer.vue"
-   
+
    // @import awesome
    import '@/awesome/scss/fontawesome.scss'
    import '@/awesome/scss/brands.scss'

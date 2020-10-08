@@ -50,10 +50,10 @@
          background-color: rgb(40, 40, 40);
          right: 0px;
 
-			@media (min-width: 772px) {
+         @media (min-width: 772px) {
             position: absolute;
-				box-shadow: none;
-			}
+            box-shadow: none;
+         }
 
          &.active {
             display: block;
@@ -79,7 +79,7 @@
             }
          }
 
-         & >>> .dropdown-item {
+         &>>>.dropdown-item {
             .dropdown-link {
                display: block;
                line-height: 1.42857;
@@ -132,7 +132,7 @@
          }
       },
       created() {
-         //document.addEventListener("click", this.onClick = () => this.active = false)
+         document.addEventListener("click", this.onClick = () => this.active = false)
       },
       beforeDestroy() {
          document.removeEventListener("click", this.onClick)

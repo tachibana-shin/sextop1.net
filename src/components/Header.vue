@@ -365,6 +365,10 @@
          heightSearch: undefined,
          stateSearch: false
       }),
+      beforeRouteEnter(from, to, next) {
+         this.stateCollapse = false
+         next()
+      },
       methods: {
          transitionEnd: noop,
          open() {
