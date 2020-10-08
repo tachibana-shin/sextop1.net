@@ -12,6 +12,7 @@
   "dependencies": {
     "axios": "^0.20.0",
     "eruda": "^2.4.1",
+    "sass-resources-loader": "^2.1.1",
     "vue": "^2.5.2",
     "vue-infinite-loading": "^2.4.5",
     "vue-progressbar": "^0.7.5",
