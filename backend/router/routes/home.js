@@ -14,7 +14,7 @@ function htmlResultToJSON(req, res, html) {
       data: {
          name: dom.querySelector(".section-title").textContent,
          title: dom.querySelector("title").textContent,
-         description: dom.querySelector("meta[name=\"description\"]").textContent,
+         description: dom.querySelector("meta[name=\"description\"]").getAttribute("content"),
          items: [...dom.querySelectorAll(".thumb")].map(item => {
 
             return {

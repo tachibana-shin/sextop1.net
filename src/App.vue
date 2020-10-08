@@ -37,11 +37,8 @@
 
    // @import awesome
    import '@/awesome/scss/fontawesome.scss'
-   import '@/awesome/scss/brands.scss'
-   import '@/awesome/scss/duotone.scss'
-   import '@/awesome/scss/light.scss'
-   import '@/awesome/scss/regular.scss'
-   import '@/awesome/scss/solid.scss'
+   import '@/awesome/scss/regular.scss'//far
+   import '@/awesome/scss/solid.scss'//fas
 
    export default {
       components: { HeaderApp, FooterApp },
