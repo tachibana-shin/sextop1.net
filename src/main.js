@@ -10,7 +10,7 @@ import VueLazy from "vue-lazyload"
 Vue.use(VueProgressBar, {
    color: 'rgb(0, 132, 240)',
    failedColor: '#f00',
-      height: 5
+   height: 5
 })
 Vue.use(VueLazy, {
    preLoad: 1.3,

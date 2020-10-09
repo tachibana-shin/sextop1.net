@@ -39,6 +39,10 @@ const routes = multiplePath([
    {
       path: "/xem-phim/:name",
       component: ViewFilm
+   },
+   {
+      path: "*",
+      redirect: "/"
    }
 ])
 

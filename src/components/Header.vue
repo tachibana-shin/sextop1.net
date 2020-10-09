@@ -1,8 +1,8 @@
 <template>
    <header class="header">
-      <div class="col-12 col-md-6 order-md-0 logo">
+      <router-link to="/" class="col-12 col-md-6 order-md-0 logo d-block">
          <img :src="require('@/assets/logo.png')">
-      </div>
+      </router-link>
       <div class="col-12 order-md-2 navbar">
          <div class="navbar.header">
             <button class="hambuger" @click="stateCollapse = !stateCollapse">
@@ -87,6 +87,10 @@
       border-bottom-style: solid;
       border-bottom-width: 1px;
       box-shadow: rgba(0, 0, 0, 0.4) 0 1px 5px;
+
+		.d-block {
+         display: block;
+		}
 
       @media (min-width: 772px) {
          background-color: rgba(15, 15, 15, 0.99);
