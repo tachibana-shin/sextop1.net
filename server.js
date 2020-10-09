@@ -1,6 +1,7 @@
 const express = require("express")
 const https = require("https")
 const fs = require("fs")
+const history = require("connect-history-api-fallback")
 const app = express()
 const path = require("path")
 const serveStatic = require("serve-static")
@@ -17,6 +18,8 @@ app.use(require("cors")())
 app.use(serveStatic(__dirname + "/dist"));
 
 router(app)
+
+app.use(history())
 
 app.use(function(req, res) {
    res.status(404).send({
