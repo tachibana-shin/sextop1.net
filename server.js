@@ -1,6 +1,4 @@
 const express = require("express")
-const https = require("https")
-const fs = require("fs")
 const history = require("connect-history-api-fallback")
 const app = express()
 const path = require("path")
@@ -32,8 +30,4 @@ app.use(function(req, res) {
    })
 })
 
-https.createServer({
-   key: fs.readFileSync(__dirname + "/ssl/selfsigned.key"),
-   cert: fs.readFileSync(__dirname + "/ssl/selfsigned.crt")
-}, app)
-.listen(port, () => console.log(`App it running in port ${port}`))
+app.listen(port, () => console.log(`App it running in port ${port}`))
