@@ -88,9 +88,9 @@
       border-bottom-width: 1px;
       box-shadow: rgba(0, 0, 0, 0.4) 0 1px 5px;
 
-		.d-block {
+      .d-block {
          display: block;
-		}
+      }
 
       @media (min-width: 772px) {
          background-color: rgba(15, 15, 15, 0.99);

@@ -1,6 +1,6 @@
 <template>
    <div id="app">
-      <vue-progressbar/>
+      <vue-progressbar />
       <header-app />
       <router-view class="router-view" />
       <footer-app />
@@ -38,8 +38,8 @@
 
    // @import awesome
    import '@/awesome/scss/fontawesome.scss'
-   import '@/awesome/scss/regular.scss'//far
-   import '@/awesome/scss/solid.scss'//fas
+   import '@/awesome/scss/regular.scss' //far
+   import '@/awesome/scss/solid.scss' //fas
 
    export default {
       components: { HeaderApp, FooterApp },
