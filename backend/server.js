@@ -1,15 +1,18 @@
 const express = require("express")
 const app = express()
+const path = require("path")
+const serveStatic = require("serve-static")
 
 const router = require("./router")
 
 const bodyParser = require('body-parser')
 
-const port = 3000 //process.env.PORT || 3000
+const port = process.env.PORT || 3000
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 app.use(require("cors")())
+app.use(serveStatic(__dirname + "/../dist"));
 
 router(app)
 
