@@ -164,7 +164,7 @@
             const { tag, type } = this.$route.params
             const { page } = this
 
-            let url = "http://localhost:3000/api/home"
+            let url = "/api/home"
 
             if (tag) {
                url += "/tag/" + tag

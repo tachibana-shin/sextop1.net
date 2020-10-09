@@ -435,7 +435,7 @@
       methods: {
          fetchNewSex() {
             this.newSex = null
-            this.$axios.get(`http://localhost:3000/api/post/${this.data.idPost}/${this.newSexType}`)
+            this.$axios.get(`/api/post/${this.data.idPost}/${this.newSexType}`)
                .then(res => res.data)
                .then(({ state, data }) => {
                   if (state.error) {
@@ -457,7 +457,7 @@
          "$route": {
             handler() {
                this.data = null
-               this.$axios.get(`http://localhost:3000/api/film/${this.$route.params.name}`)
+               this.$axios.get(`/api/film/${this.$route.params.name}`)
                   .then(res => res.data)
                   .then(({ state, data }) => {
                      if (state.error) {

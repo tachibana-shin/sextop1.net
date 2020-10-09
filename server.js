@@ -12,7 +12,7 @@ const port = process.env.PORT || 3000
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 app.use(require("cors")())
-app.use(serveStatic(__dirname + "/../dist"));
+app.use(serveStatic(__dirname + "/dist"));
 
 router(app)
 
