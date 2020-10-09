@@ -1,9 +1,6 @@
-import eruda from "eruda"
-eruda.init()
-
 import Vue from "vue"
-import App from "./App.vue"
-import router from "./router/index.js"
+import App from "./App"
+import router from "./router"
 
 // import plugins
 import VueProgressBar from "vue-progressbar"

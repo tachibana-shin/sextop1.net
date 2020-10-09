@@ -1,4 +1,6 @@
 const express = require("express")
+const https = require("https")
+const fs = require("fs")
 const app = express()
 const path = require("path")
 const serveStatic = require("serve-static")
@@ -27,4 +29,8 @@ app.use(function(req, res) {
    })
 })
 
-app.listen(port, () => console.log(`App it running in port ${port}`))
+https.createServer({
+   key: fs.readFileSync(__dirname + "/ssl/selfsigned.key"),
+   cert: fs.readFileSync(__dirname + "/ssl/selfsigned.crt")
+}, app)
+.listen(port, () => console.log(`App it running in port ${port}`))
