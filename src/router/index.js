@@ -1,7 +1,5 @@
 import Vue from "vue"
 import Router from "vue-router"
-import Home from "../pages/Home.vue"
-import ViewFilm from "../pages/View-Film.vue"
 
 Vue.use(Router)
 
@@ -34,11 +32,11 @@ const routes = multiplePath([
          "/type/:type",
          "/type/:type/page/:page"
       ],
-      component: Home
+      component: () => import("../pages/Home.vue")
    },
    {
       path: "/xem-phim/:name",
-      component: ViewFilm
+      component: () => import("../pages/View-Film.vue")
    },
    {
       path: "*",
