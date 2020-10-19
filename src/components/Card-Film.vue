@@ -23,10 +23,9 @@
          white-space: nowrap;
       }
 
-      @if ($count !=-1) {
-         -webkit-box-orient: vertical;
-         -webkit-line-clamp: $count;
-      }
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: $count;
+
    }
 
    .card-film {
