@@ -23,7 +23,7 @@ module.exports = {
                   poster: item.querySelector(".post-thumb").getAttribute("src"),
                   name: item.querySelector(".title").textContent,
                   view: item.querySelector(".viewsCount").textContent.replace(/\D/g, ""),
-                  path: item.querySelector(".item-link").getAttribute("href").replace(/https?:\/\/sextop1\.(net|pro|com|\w{3})\//g, "").replace(/\/$/, "")
+                  path: item.querySelector(".item-link").getAttribute("href").replace(/https?:\/\/sextop1\.(net|pro|com|\w{2,4})\//g, "").replace(/\/$/, "")
                }))
             })
          })

@@ -20,7 +20,7 @@ function htmlResultToJSON(req, res, html) {
             return {
                poster: item.querySelector(".dp-thumb > figure > img").getAttribute("src"),
                name: item.querySelector(".entry-title a").textContent,
-               path: item.querySelector(".dp-thumb").getAttribute("href").replace(/https?:\/\/sextop1\.(net|pro|com|\w{3})\//g, "").replace(/\/$/, "")
+               path: item.querySelector(".dp-thumb").getAttribute("href").replace(/https?:\/\/sextop1\.(net|pro|com|\w{2,4})\//g, "").replace(/\/$/, "")
             }
          })
       }

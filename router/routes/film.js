@@ -24,7 +24,7 @@ module.exports = {
                      text: item.textContent
                   })),
                   categorys: [...dom.querySelectorAll(".the_tag_list > a[rel=\"category tag\"]")].map(item => ({
-                     path: item.getAttribute("href").replace(/https?:\/\/sextop1\.(net|pro|com|\w{3})\//g, "").replace(/\/$/, ""),
+                     path: item.getAttribute("href").replace(/https?:\/\/sextop1\.(net|pro|com|\w{2,4})\//g, "").replace(/\/$/, ""),
                      text: item.textContent
                   })),
                   dpThumb: [...dom.querySelectorAll(".dp-item")].map(item => {
